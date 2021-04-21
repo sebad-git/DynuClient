@@ -1,49 +1,61 @@
 
 package dynuclient.view;
+import dynuclient.events.IDataListener;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.SystemTray;
-import java.awt.Toolkit;
 import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import dynuclient.model.Data;
+import dynuclient.util.UpdateThread;
 
 /**
  *
  * @author sebad-git
  */
-public class DynuClient {
+public class DynuClient implements IDataListener {
     
- 
-  private static final Image image = loadImage("logodynu.png");
+  private static final Image image = LocalImages.loadImage(LocalImages.DYN_ICON);
   private static final TrayIcon trayIcon = new TrayIcon(image, "Dynu Client");
   private static final TrayPopupMenu menu = new TrayPopupMenu();
   
-  public static void main(String args[]) throws Exception {
-    if (SystemTray.isSupported()) {
-      SystemTray tray = SystemTray.getSystemTray();
-      trayIcon.setImageAutoSize(true);
-      trayIcon.setToolTip("Dynu Client");
-      trayIcon.setPopupMenu(menu);
-      try {
-        tray.add(trayIcon);
-      } catch (AWTException e) {
-         JOptionPane.showMessageDialog(null,"TrayIcon could not be added.","Error", JOptionPane.ERROR_MESSAGE);
-      }
-    }else{
-        JOptionPane.showMessageDialog(null,"Tray icon not Supported.","Error", JOptionPane.ERROR_MESSAGE);
-    }
-  }
+  public static void main(String args[]) { createTray(); }
   
-  private static BufferedImage loadImage(String fileName){
-    try {
-        BufferedImage buff = ImageIO.read(DynuClient.class.getResourceAsStream(fileName));
-       return buff;
-    } catch (Exception e) { e.printStackTrace(); return null; }
+  private static void createTray(){
+    if (SystemTray.isSupported()) {
+        SplashWindow.getInstance().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try { Thread.sleep(2000); SplashWindow.getInstance().setVisible(false); }
+                catch (InterruptedException ex) {}
+            }
+        });
+        if(Data.isEmpty()){ DynuClientWindow.getInstance().setVisible(true); }
+        else{ UpdateThread.getInstance().Start(); }
+        SystemTray tray = SystemTray.getSystemTray();
+        trayIcon.setImageAutoSize(true);
+        trayIcon.setToolTip("Dynu Client");
+        trayIcon.setPopupMenu(menu);
+        try { tray.add(trayIcon); }
+        catch (AWTException e) { 
+            JOptionPane.showMessageDialog(null,"TrayIcon could not be added.","Error", JOptionPane.ERROR_MESSAGE);
+            UpdateThread.getInstance().Stop();
+            System.exit(0);
+        }
+    }else{ 
+        JOptionPane.showMessageDialog(null,"Tray icon not Supported.","Error", JOptionPane.ERROR_MESSAGE);
+        UpdateThread.getInstance().Stop();
+        System.exit(0);
+    }
     
   }
-  
+
+    @Override
+    public void onDataUpdated() {
+        if(!Data.isEmpty()){
+            UpdateThread.getInstance().Start();
+            trayIcon.displayMessage("Dynu", "Update Service Started", TrayIcon.MessageType.INFO);
+        }
+    }
+
 }

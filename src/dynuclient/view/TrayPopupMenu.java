@@ -5,13 +5,11 @@
  */
 package dynuclient.view;
 
+import dynuclient.util.UpdateThread;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
-import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,35 +18,22 @@ import javax.swing.JOptionPane;
 public class TrayPopupMenu extends PopupMenu implements ActionListener{
     
     private final MenuItem settings = new MenuItem("Settings");
-    private final MenuItem start = new MenuItem("Start");
-    private final MenuItem stop = new MenuItem("Stop");
     private final MenuItem exit = new MenuItem("Exit");
     
     public TrayPopupMenu(){
        settings.addActionListener(this);
-       start.addActionListener(this);
-       stop.addActionListener(this);
        exit.addActionListener(this);
-       add(settings); add(start); add(stop); add(exit);
+       add(settings); add(exit);
     }
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==settings) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new DynuClientWindow().setVisible(true);
-                }
-            });
-            return;
+           DynuClientWindow.getInstance().setVisible(true);
+           return;
         }
-        if (e.getSource()==start) {
-            JOptionPane.showMessageDialog(null,"START","MSG", JOptionPane.INFORMATION_MESSAGE);
-            return;
+        if (e.getSource()==exit) { 
+            UpdateThread.getInstance().Stop();
+            System.exit(0);
         }
-        if (e.getSource()==stop) {
-            JOptionPane.showMessageDialog(null,"STOP","MSG", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        if (e.getSource()==exit) { System.exit(0); }
     }
 }

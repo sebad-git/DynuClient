@@ -1,6 +1,7 @@
 
 package dynuclient.model;
 
+import dynuclient.events.EventManager;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,22 +15,21 @@ import java.io.IOException;
  */
 public class Data {
     
-    private static final String FILE_NAME = "dynu.dat";
+    private static final File DATA_FILE = new File("dynu.dat");
     
     private String user, password, ttl;
     
-    public String User(){return user;}
-    public String Password(){return password;}
-    public String TTL(){return ttl;}
+    public String User(){ return user; }
+    public String Password(){ return password; }
+    public String TTL(){ return ttl; }
     
     public Data(String user, String password, int ttl){
         this.user=user; this.password=password; this.ttl = String.valueOf(ttl);
     }
     
     public static final void save(Data data) throws IOException {
-        File dataFile = new File(FILE_NAME);
-        if(!dataFile.exists()){dataFile.createNewFile();}
-        BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
+        if(!DATA_FILE.exists()){DATA_FILE.createNewFile();}
+        BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE));
         StringBuilder sData = new StringBuilder();
         sData.append(data.User()); sData.append(";");
         sData.append(data.Password()); sData.append(";");
@@ -37,16 +37,24 @@ public class Data {
         writer.write(sData.toString());
         writer.flush();
         writer.close();
+        EventManager.notifyListeners();
     }
     
+     public static final boolean isEmpty(){ 
+         if(!DATA_FILE.exists()){return true;}
+         Data data = Load();
+         if(data.User()==null || data.User().length()<1){ return true; }
+         if(data.Password()==null || data.Password().length()<1){ return true; }
+         return false;
+     }
+    
     public static final Data Load(){
-        File dataFile = new File(FILE_NAME);
         Data empty = new Data("","", 60);
-        if(!dataFile.exists()){ return empty; }
+        if(!DATA_FILE.exists()){ return empty; }
         String user, password, ttl;
         String[] sData;
         try (
-            BufferedReader reader = new BufferedReader(new FileReader(dataFile))) {
+            BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE))) {
             String line = reader.readLine();
             reader.close();
             if(line==null || line.length()<1){return empty; }
