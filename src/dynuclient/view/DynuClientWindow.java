@@ -29,7 +29,7 @@ public class DynuClientWindow extends javax.swing.JFrame {
         this.data=Data.Load();
         this.txtUser.setText(this.data.User());
         this.txtPassword.setText(this.data.Password());
-        this.txtTTL.setText(this.data.TTL());
+        this.txtTTL.setText(String.valueOf(this.data.TTL()));
     }
 
     @SuppressWarnings("unchecked")

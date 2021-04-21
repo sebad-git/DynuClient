@@ -1,7 +1,7 @@
 
 package dynuclient.model;
 
-import dynuclient.events.EventManager;
+import dynuclient.util.UpdateThread;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,7 +21,7 @@ public class Data {
     
     public String User(){ return user; }
     public String Password(){ return password; }
-    public String TTL(){ return ttl; }
+    public int TTL(){ try{ return Integer.parseInt(ttl);}catch(NumberFormatException e){return 120;} }
     
     public Data(String user, String password, int ttl){
         this.user=user; this.password=password; this.ttl = String.valueOf(ttl);
@@ -37,7 +37,7 @@ public class Data {
         writer.write(sData.toString());
         writer.flush();
         writer.close();
-        EventManager.notifyListeners();
+        if(!Data.isEmpty()){ UpdateThread.getInstance().Start(); }
     }
     
      public static final boolean isEmpty(){ 

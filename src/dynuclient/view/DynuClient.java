@@ -1,7 +1,5 @@
 
 package dynuclient.view;
-import dynuclient.events.EventManager;
-import dynuclient.events.IDataListener;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.SystemTray;
@@ -14,7 +12,7 @@ import dynuclient.util.UpdateThread;
  *
  * @author sebad-git
  */
-public class DynuClient implements IDataListener {
+public class DynuClient {
     
   private static final Image image = LocalImages.loadImage(LocalImages.DYN_ICON);
   private static final TrayIcon trayIcon = new TrayIcon(image, "Dynu Client");
@@ -29,35 +27,27 @@ public class DynuClient implements IDataListener {
             public void run() {
                 try { Thread.sleep(2000); SplashWindow.getInstance().setVisible(false); }
                 catch (InterruptedException ex) {}
+                 if(Data.isEmpty()){ DynuClientWindow.getInstance().setVisible(true); }
+                 else{ UpdateThread.getInstance().Start(); }
+                  SystemTray tray = SystemTray.getSystemTray();
+                trayIcon.setImageAutoSize(true);
+                trayIcon.setToolTip("Dynu Client");
+                trayIcon.setPopupMenu(menu);
+                try { tray.add(trayIcon); }
+                catch (AWTException e) { 
+                    JOptionPane.showMessageDialog(null,"TrayIcon could not be added.","Error", JOptionPane.ERROR_MESSAGE);
+                    UpdateThread.getInstance().Stop();
+                    System.exit(0);
+                }
             }
         });
-        if(Data.isEmpty()){ DynuClientWindow.getInstance().setVisible(true); }
-        else{ UpdateThread.getInstance().Start(); }
-        SystemTray tray = SystemTray.getSystemTray();
-        trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip("Dynu Client");
-        trayIcon.setPopupMenu(menu);
-        try { tray.add(trayIcon); }
-        catch (AWTException e) { 
-            JOptionPane.showMessageDialog(null,"TrayIcon could not be added.","Error", JOptionPane.ERROR_MESSAGE);
-            UpdateThread.getInstance().Stop();
-            System.exit(0);
-        }
-    }else{ 
+       
+    }else{
         JOptionPane.showMessageDialog(null,"Tray icon not Supported.","Error", JOptionPane.ERROR_MESSAGE);
         UpdateThread.getInstance().Stop();
         System.exit(0);
     }
     
   }
-
-    @Override
-    public void onDataUpdated() {
-         System.out.println("Data Updated");
-        if(!Data.isEmpty()){
-            UpdateThread.getInstance().Start();
-            trayIcon.displayMessage("Dynu", "Update Service Started", TrayIcon.MessageType.INFO);
-        }
-    }
-
+  
 }
