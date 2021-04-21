@@ -49,7 +49,7 @@ public class Data {
      }
     
     public static final Data Load(){
-        Data empty = new Data("","", 120);
+        Data empty = new Data("","", 5);
         if(!DATA_FILE.exists()){ return empty; }
         String user, password, ttl;
         String[] sData;
