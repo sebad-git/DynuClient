@@ -7,6 +7,9 @@
 # Data
 *.dat
 
+# ReadMe
+README.TXT
+
 # BlueJ files
 *.ctxt
 
