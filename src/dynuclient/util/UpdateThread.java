@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dynuclient;
+package dynuclient.util;
+
+import dynuclient.model.Data;
+import dynuclient.util.HttpClient;
 
 /**
  *

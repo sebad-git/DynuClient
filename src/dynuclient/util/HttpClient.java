@@ -1,14 +1,11 @@
 
-package dynuclient;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+package dynuclient.util;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
  *
- * @author deneg
+ * @author sebad-git
  */
 public class HttpClient {
     
