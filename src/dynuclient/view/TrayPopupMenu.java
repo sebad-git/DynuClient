@@ -28,7 +28,7 @@ public class TrayPopupMenu extends PopupMenu implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==settings) {
-           DynuClientWindow.getInstance().setVisible(true);
+           SettingsWindow.getInstance().setVisible(true);
            return;
         }
         if (e.getSource()==exit) { 

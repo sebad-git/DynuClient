@@ -1,5 +1,6 @@
 
 package dynuclient.view;
+import dynuclient.util.Theme;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.SystemTray;
@@ -7,6 +8,7 @@ import java.awt.TrayIcon;
 import javax.swing.JOptionPane;
 import dynuclient.model.Data;
 import dynuclient.util.UpdateThread;
+import javax.swing.UIManager;
 
 /**
  *
@@ -18,17 +20,18 @@ public class DynuClient {
   private static final TrayIcon trayIcon = new TrayIcon(image, "Dynu Client");
   private static final TrayPopupMenu menu = new TrayPopupMenu();
   
-  public static void main(String args[]) { new DynuClient(); }
+  public static void main(String args[]) { Theme.setTheme(); new DynuClient(); }
   
   private DynuClient(){
     if (SystemTray.isSupported()) {
-        SplashWindow.getInstance().setVisible(true);
+        SplashWindow splash = new SplashWindow();
+        splash.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try { Thread.sleep(2000); SplashWindow.getInstance().setVisible(false); }
+                try { Thread.sleep(1500); splash.setVisible(false); }
                 catch (InterruptedException ex) {}
-                 if(Data.isEmpty()){ DynuClientWindow.getInstance().setVisible(true); }
-                 else{ UpdateThread.getInstance().Start(); }
+                 if(Data.isEmpty()){ SettingsWindow.getInstance().setVisible(true); }
+                 else{ UpdateThread.getInstance().Start(); trayIcon.setToolTip("Dynu Client Started..."); }
                   SystemTray tray = SystemTray.getSystemTray();
                 trayIcon.setImageAutoSize(true);
                 trayIcon.setToolTip("Dynu Client");

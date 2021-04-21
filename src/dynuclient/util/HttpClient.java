@@ -1,5 +1,6 @@
 
 package dynuclient.util;
+import dynuclient.model.Data;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -12,14 +13,9 @@ public class HttpClient {
     private static final int TIMEOUT = 10 *1000;
     private static final String API_URL_FORMAT = "https://api.dynu.com/nic/update?username=%s&password=%s";
     
-    private String user, password, apiUrl;
-    
-    public HttpClient(String user, String password){
-        this.user=user; this.password=password;
-        apiUrl=String.format(API_URL_FORMAT, this.user,this.password);
-    }
-    public String CallApi(){
+    public String CallApi(String user, String password){
         try{
+            String apiUrl =String.format(API_URL_FORMAT,user,password);
             URL url = new URL(apiUrl);
             System.out.println("Connecting to:"+ apiUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
