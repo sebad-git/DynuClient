@@ -21,7 +21,10 @@ public class SettingsWindow extends javax.swing.JFrame {
     }
     
     public SettingsWindow() {
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setResizable(false);
         initComponents();
+         setTitle("Dynu Settings");
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
@@ -30,7 +33,19 @@ public class SettingsWindow extends javax.swing.JFrame {
         this.data=Data.Load();
         this.txtUser.setText(this.data.User());
         this.txtPassword.setText(this.data.Password());
-        this.txtTTL.setText(String.valueOf(this.data.TTL()));
+        switch(this.data.TTL()){
+            case 5: this.cboTTL.setSelectedIndex(0); break;
+            case 10: this.cboTTL.setSelectedIndex(1); break;
+            case 15: this.cboTTL.setSelectedIndex(2); break;
+            case 30: this.cboTTL.setSelectedIndex(3); break;
+            case 60: this.cboTTL.setSelectedIndex(4); break;
+            case 120: this.cboTTL.setSelectedIndex(5); break;
+            case 180: this.cboTTL.setSelectedIndex(6); break;
+            case 300: this.cboTTL.setSelectedIndex(7); break;
+            case 600: this.cboTTL.setSelectedIndex(8); break;
+            case 900: this.cboTTL.setSelectedIndex(9); break;
+            case 1440: this.cboTTL.setSelectedIndex(10); break;
+        }
        this.txtPassword.setEchoChar('*');
     }
 
@@ -45,10 +60,10 @@ public class SettingsWindow extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         lblPassword = new javax.swing.JLabel();
         lblTTL1 = new javax.swing.JLabel();
-        txtTTL = new javax.swing.JTextField();
         cb_ShowPWD = new javax.swing.JCheckBox();
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
+        cboTTL = new javax.swing.JComboBox<>();
 
         setTitle("Dynu Client");
         setBackground(new java.awt.Color(51, 204, 255));
@@ -56,7 +71,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(222, 224, 228));
 
         lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUserIcon.setIcon(LocalImages.loadIcon(LocalImages.DYN_USER));
+        lblUserIcon.setIcon(LocalImages.loadIcon(LocalImages.DYN_ICON));
 
         lblUser.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(64, 64, 64));
@@ -92,15 +107,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         lblTTL1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         lblTTL1.setDoubleBuffered(true);
 
-        txtTTL.setBackground(new java.awt.Color(246, 246, 246));
-        txtTTL.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        txtTTL.setForeground(new java.awt.Color(102, 102, 102));
-        txtTTL.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTTL.setText("120");
-        txtTTL.setToolTipText("Time between queries");
-        txtTTL.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        cb_ShowPWD.setBackground(new java.awt.Color(246, 246, 246));
+        cb_ShowPWD.setBackground(new java.awt.Color(222, 224, 228));
         cb_ShowPWD.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cb_ShowPWD.setForeground(new java.awt.Color(64, 64, 64));
         cb_ShowPWD.setText("Show Password");
@@ -131,7 +138,7 @@ public class SettingsWindow extends javax.swing.JFrame {
 
         btnStop.setBackground(new java.awt.Color(50, 103, 249));
         btnStop.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        btnStop.setForeground(new java.awt.Color(64, 64, 64));
+        btnStop.setForeground(new java.awt.Color(246, 246, 246));
         btnStop.setText("Close");
         btnStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnStop.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +147,9 @@ public class SettingsWindow extends javax.swing.JFrame {
             }
         });
 
+        cboTTL.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        cboTTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "3 hours", "5 hours", "10  hours", "15  hours", "24 hours" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,11 +157,11 @@ public class SettingsWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblTTL1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTTL1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTTL, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(cboTTL, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
                         .addComponent(cb_ShowPWD, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,31 +175,33 @@ public class SettingsWindow extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPassword)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
             .addComponent(lblUserIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblUserIcon)
+                .addContainerGap()
+                .addComponent(lblUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTTL)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cb_ShowPWD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTTL1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTTL1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboTTL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblPassword.getAccessibleContext().setAccessibleName("lblPassword");
@@ -202,7 +214,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -210,7 +222,21 @@ public class SettingsWindow extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if(!this.validateData()){ return; }
-        this.data = new Data(txtUser.getText(), new String(txtPassword.getPassword()), Integer.parseInt(txtTTL.getText()));
+        int ttl=5;
+         switch(this.cboTTL.getSelectedIndex()){
+            case 0: ttl = 5; break;
+            case 1: ttl = 10; break;
+            case 2: ttl = 15; break;
+            case 3: ttl = 30; break;
+            case 4: ttl = 60; break;
+            case 5: ttl = 120; break;
+            case 6: ttl = 180; break;
+            case 7: ttl = 300; break;
+            case 8: ttl = 600; break;
+            case 9: ttl = 900; break;
+            case 10: ttl = 1440; break;
+        }
+        this.data = new Data(txtUser.getText(), new String(txtPassword.getPassword()),ttl);
         try { Data.save(this.data); }
         catch (IOException ex) { ex.printStackTrace(); }
         this.setVisible(false);
@@ -238,20 +264,6 @@ public class SettingsWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Password is empty.","Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if(this.txtTTL.getText()== null || this.txtTTL.getText().length()<1){
-            JOptionPane.showMessageDialog(this, "MTU is empty.","Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        int mtu = 0;
-        try{ mtu = Integer.parseInt(this.txtTTL.getText()); }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this,"MTU is not a number.","Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if(mtu ==0){
-            JOptionPane.showMessageDialog(this, "MTU cant be 0.","Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
         return true;
     }
 
@@ -259,13 +271,13 @@ public class SettingsWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
     private javax.swing.JCheckBox cb_ShowPWD;
+    private javax.swing.JComboBox<String> cboTTL;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTTL1;
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUserIcon;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtTTL;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

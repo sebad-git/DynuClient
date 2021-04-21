@@ -20,7 +20,7 @@ public class Logger {
         if(!logFile.getParentFile().exists()){ logFile.getParentFile().mkdirs(); }
         if(!logFile.exists()){logFile.createNewFile(); }
         BufferedWriter writer = new BufferedWriter(new FileWriter(logFile,true));
-        writer.append(String.format("%s: %s",new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()),data) );
+        writer.append(String.format("[%s]: %s",new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()),data) );
         writer.newLine();
         writer.close();
       }

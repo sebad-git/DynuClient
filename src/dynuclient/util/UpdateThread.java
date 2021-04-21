@@ -2,6 +2,8 @@
 package dynuclient.util;
 
 import dynuclient.model.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -39,7 +41,11 @@ public class UpdateThread extends Thread {
             String response=this.client.CallApi(data.User(),data.Password());
             System.out.println(response);
             Logger.log(response);
-            try {Thread.sleep(data.TTL()*1000); } catch (InterruptedException ex) {}
+            String nextCall = String.format("Next call in %s minutes.",
+                     new SimpleDateFormat("mm").format(new Date(data.TTL()*60*1000)));
+            System.out.println(nextCall);
+            Logger.log(nextCall);
+            try {Thread.sleep(data.TTL()*60*1000); } catch (InterruptedException ex) {}
         }
     }
     
