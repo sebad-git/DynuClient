@@ -12,7 +12,7 @@ public class EventManager {
     private static final List<IDataListener> dataListeners = new ArrayList<IDataListener>();
     
     public static void subscribe(IDataListener dataListener){
-        if(dataListeners.contains(dataListener)){return;}
+        if(dataListeners.contains(dataListener)){ return; }
         dataListeners.add(dataListener);
     }
     
@@ -23,7 +23,11 @@ public class EventManager {
     
     public static void notifyListeners(){
         if(!dataListeners.isEmpty()){return;}
-        for (IDataListener dataListener : dataListeners) { dataListener.onDataUpdated(); }
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                for (IDataListener dataListener : dataListeners) { dataListener.onDataUpdated(); }
+            }
+        });
     }
     
 }

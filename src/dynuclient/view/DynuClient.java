@@ -1,5 +1,6 @@
 
 package dynuclient.view;
+import dynuclient.events.EventManager;
 import dynuclient.events.IDataListener;
 import java.awt.AWTException;
 import java.awt.Image;
@@ -19,9 +20,9 @@ public class DynuClient implements IDataListener {
   private static final TrayIcon trayIcon = new TrayIcon(image, "Dynu Client");
   private static final TrayPopupMenu menu = new TrayPopupMenu();
   
-  public static void main(String args[]) { createTray(); }
+  public static void main(String args[]) { new DynuClient(); }
   
-  private static void createTray(){
+  private DynuClient(){
     if (SystemTray.isSupported()) {
         SplashWindow.getInstance().setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -52,6 +53,7 @@ public class DynuClient implements IDataListener {
 
     @Override
     public void onDataUpdated() {
+         System.out.println("Data Updated");
         if(!Data.isEmpty()){
             UpdateThread.getInstance().Start();
             trayIcon.displayMessage("Dynu", "Update Service Started", TrayIcon.MessageType.INFO);
