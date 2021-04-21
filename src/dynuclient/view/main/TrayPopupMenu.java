@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dynuclient.view;
+package dynuclient.view.main;
 
+import dynuclient.view.windows.SettingsWindow;
 import dynuclient.util.UpdateThread;
+import dynuclient.view.windows.SettingsWindow;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;

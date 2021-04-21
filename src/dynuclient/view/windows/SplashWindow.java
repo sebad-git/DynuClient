@@ -1,9 +1,10 @@
 
-package dynuclient.view;
+package dynuclient.view.windows;
 
+import dynuclient.view.util.LocalImages;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Toolkit;
+
 
 /**
  *
@@ -37,8 +38,8 @@ public class SplashWindow extends javax.swing.JFrame {
         jLabel1.setText("Dynu Client");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dynuclient/view/logo.png"))); // NOI18N
-        jLabel2.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dynuclient/view/logodynu.png"))); // NOI18N
+        jLabel2.setIcon(LocalImages.loadIcon(LocalImages.DYN_LOGO));
+        jLabel2.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dynuclient/view/util/logodynu.png")));
         jLabel2.setIconTextGap(0);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

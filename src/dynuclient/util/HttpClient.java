@@ -1,6 +1,5 @@
 
 package dynuclient.util;
-import dynuclient.model.Data;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -29,7 +28,7 @@ public class HttpClient {
             else{ response.append("IP NOT Updated"); }
             return response.toString();
         }catch(Exception e){
-            return String.format("Coonection Failed (%s).", e.getMessage());
+            return String.format("Connection Failed (%s).", e.getMessage());
         }
     }
 }

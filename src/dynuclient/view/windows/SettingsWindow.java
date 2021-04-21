@@ -1,6 +1,7 @@
 
-package dynuclient.view;
+package dynuclient.view.windows;
 
+import dynuclient.view.util.LocalImages;
 import dynuclient.model.Data;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -37,7 +38,6 @@ public class SettingsWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblUserIcon = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
@@ -50,15 +50,13 @@ public class SettingsWindow extends javax.swing.JFrame {
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
-
         setTitle("Dynu Client");
         setBackground(new java.awt.Color(51, 204, 255));
 
         jPanel1.setBackground(new java.awt.Color(222, 224, 228));
 
         lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dynuclient/view/user.png"))); // NOI18N
+        lblUserIcon.setIcon(LocalImages.loadIcon(LocalImages.DYN_USER));
 
         lblUser.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(64, 64, 64));
@@ -261,7 +259,6 @@ public class SettingsWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
     private javax.swing.JCheckBox cb_ShowPWD;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTTL1;

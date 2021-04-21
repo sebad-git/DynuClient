@@ -1,6 +1,5 @@
 
-package dynuclient.view;
-import dynuclient.util.Theme;
+package dynuclient.view.main;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.SystemTray;
@@ -8,6 +7,10 @@ import java.awt.TrayIcon;
 import javax.swing.JOptionPane;
 import dynuclient.model.Data;
 import dynuclient.util.UpdateThread;
+import dynuclient.view.util.LocalImages;
+import dynuclient.view.windows.SettingsWindow;
+import dynuclient.view.windows.SplashWindow;
+import dynuclient.view.util.Theme;
 import javax.swing.UIManager;
 
 /**

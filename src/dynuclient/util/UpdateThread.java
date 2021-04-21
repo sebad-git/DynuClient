@@ -24,6 +24,7 @@ public class UpdateThread extends Thread {
         this.running=true;
          this.client = new HttpClient();
         this.start();
+        Logger.log("PROCESS STARTED.");
         System.out.println("PROCESS STARTED.");
     }
     
@@ -33,13 +34,19 @@ public class UpdateThread extends Thread {
         while(this.running){
             if(Data.isEmpty()){ return; }
             System.out.println("Calling api.");
+            Logger.log("Calling api.");
             Data data = Data.Load();
             String response=this.client.CallApi(data.User(),data.Password());
-             System.out.println(response);
+            System.out.println(response);
+            Logger.log(response);
             try {Thread.sleep(data.TTL()*1000); } catch (InterruptedException ex) {}
         }
     }
     
-    public void Stop(){ this.running=false; instance=null; System.out.println("PROCESS STOPPED."); }
+    public void Stop(){ 
+        this.running=false; instance=null; 
+        System.out.println("PROCESS STOPPED.");
+        Logger.log("PROCESS STOPPED.");
+    }
     
 }

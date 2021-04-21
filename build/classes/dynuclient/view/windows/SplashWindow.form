@@ -55,12 +55,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/dynuclient/view/logo.png"/>
-        </Property>
-        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/dynuclient/view/logodynu.png"/>
+        <Property name="horizontalAlignment" type="int" value="0" postCode="jLabel2.setIcon(LocalImages.loadIcon(LocalImages.DYN_LOGO));"/>
+        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/dynuclient/view/util/logodynu.png&quot;))" type="code"/>
         </Property>
         <Property name="iconTextGap" type="int" value="0"/>
       </Properties>
