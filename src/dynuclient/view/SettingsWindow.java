@@ -1,5 +1,5 @@
 
-package dynuclient.view.windows;
+package dynuclient.view;
 
 import dynuclient.resources.Resources;
 import dynuclient.model.Data;
@@ -77,7 +77,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(222, 224, 228));
 
         lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUserIcon.setIcon(Resources.loadIcon(Resources.DYN_ICON));
+        lblUserIcon.setIcon(dynuclient.resources.Resources.loadIcon(dynuclient.resources.Resources.DYN_ICON));
 
         lblUser.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(64, 64, 64));

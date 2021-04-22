@@ -1,7 +1,7 @@
 
 package dynuclient.util;
 
-import dynuclient.view.main.App;
+import dynuclient.view.App;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

@@ -1,5 +1,5 @@
 
-package dynuclient.view.main;
+package dynuclient.view;
 
 import dynuclient.util.Logger;
 import dynuclient.util.UpdateThread;

@@ -1,26 +1,25 @@
 
-package dynuclient.view.windows;
+package dynuclient.view;
 
 import dynuclient.model.Data;
 import dynuclient.resources.Resources;
 import dynuclient.util.Logger;
 import dynuclient.util.UpdateThread;
-import dynuclient.view.main.App;
-import dynuclient.view.main.TrayPopupMenu;
+import dynuclient.view.App;
+import dynuclient.view.TrayPopupMenu;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
 
-
 /**
  *
  * @author sebad-git
  */
-public class SplashWindow extends javax.swing.JFrame {
+public class DynuClient extends javax.swing.JFrame {
 
-    public SplashWindow() {
+    public DynuClient() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated (true);
         setResizable(false);
@@ -65,6 +64,14 @@ public class SplashWindow extends javax.swing.JFrame {
              trayIcon.displayMessage(App.NAME, "Update Service Started..", TrayIcon.MessageType.INFO);
          }
        }else{ App.exit("Tray icon not Supported."); }
+    }
+    
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                App.setTheme();
+                new DynuClient().setVisible(true);
+            }});
     }
     
     @SuppressWarnings("unchecked")

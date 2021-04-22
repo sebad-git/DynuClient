@@ -1,7 +1,6 @@
 
-package dynuclient.view.main;
+package dynuclient.view;
 
-import dynuclient.view.windows.SettingsWindow;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
