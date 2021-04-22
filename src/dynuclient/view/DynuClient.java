@@ -53,7 +53,7 @@ public class DynuClient extends javax.swing.JFrame {
             catch (Exception e) {AppLogger.log(e); App.exit("Tray icon not Supported."); }
          if(Data.isEmpty()){ App.ShowSettings(); }
          else{
-             //UpdateService.getInstance().Start();
+             UpdateService.getInstance().Start();
              trayIcon.displayMessage(App.NAME, "Update Service Started..", TrayIcon.MessageType.INFO);
          }
        }else{ App.exit("Tray icon not Supported."); }
