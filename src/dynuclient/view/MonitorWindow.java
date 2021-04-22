@@ -72,6 +72,7 @@ public class MonitorWindow extends javax.swing.JFrame {
 
         txtLog.setBackground(new java.awt.Color(51, 50, 50));
         txtLog.setColumns(20);
+        txtLog.setFont(new java.awt.Font("Cambria Math", 0, 13)); // NOI18N
         txtLog.setForeground(new java.awt.Color(255, 255, 255));
         txtLog.setRows(5);
         txtLog.setBorder(null);
