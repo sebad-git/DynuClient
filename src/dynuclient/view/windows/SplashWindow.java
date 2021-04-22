@@ -1,9 +1,17 @@
 
 package dynuclient.view.windows;
 
-import dynuclient.view.util.LocalImages;
+import dynuclient.model.Data;
+import dynuclient.resources.Resources;
+import dynuclient.util.Logger;
+import dynuclient.util.UpdateThread;
+import dynuclient.view.main.App;
+import dynuclient.view.main.TrayPopupMenu;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.SystemTray;
 import java.awt.Toolkit;
+import java.awt.TrayIcon;
 
 
 /**
@@ -22,6 +30,43 @@ public class SplashWindow extends javax.swing.JFrame {
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
         setLocation(x, y);
     }
+
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        if(b){ startApp(); }
+    }
+    
+    private void startApp(){
+        java.awt.EventQueue.invokeLater(new Runnable() {
+          public void run() {
+              try { Thread.sleep(1300); setVisible(false); } catch (InterruptedException ex) {}
+              createTray();
+              dispose();
+          }});
+    }
+    
+    private void createTray(){
+        if (SystemTray.isSupported()) {
+             SystemTray tray = SystemTray.getSystemTray();
+             final Image image = Resources.loadImage(Resources.DYN_ICON);
+             final TrayIcon trayIcon = new TrayIcon(image, App.NAME);
+             trayIcon.setImageAutoSize(true);
+             trayIcon.setToolTip(App.NAME);
+             trayIcon.setPopupMenu(new TrayPopupMenu());
+            try {
+                tray.add(trayIcon);
+                trayIcon.displayMessage(App.NAME, "App Started.", TrayIcon.MessageType.INFO);
+            }
+            catch (Exception e) {Logger.log(e); App.exit("Tray icon not Supported."); }
+         if(Data.isEmpty()){ SettingsWindow.getInstance().setVisible(true); }
+         else{
+             UpdateThread.getInstance().Start();
+             trayIcon.displayMessage(App.NAME, "Update Service Started..", TrayIcon.MessageType.INFO);
+         }
+       }else{ App.exit("Tray icon not Supported."); }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,8 +83,7 @@ public class SplashWindow extends javax.swing.JFrame {
         jLabel1.setText("Dynu Client");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(LocalImages.loadIcon(LocalImages.DYN_LOGO));
-        jLabel2.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dynuclient/view/util/logodynu.png")));
+        jLabel2.setIcon(dynuclient.resources.Resources.loadIcon(dynuclient.resources.Resources.DYN_LOGO));
         jLabel2.setIconTextGap(0);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

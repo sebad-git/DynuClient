@@ -41,8 +41,8 @@ public class UpdateThread extends Thread {
             String response=this.client.CallApi(data.User(),data.Password());
             System.out.println(response);
             Logger.log(response);
-            String nextCall = String.format("Next call in %s minutes.",
-                     new SimpleDateFormat("mm").format(new Date(data.TTL()*60*1000)));
+            String nextCallTime = new SimpleDateFormat("hh:mm").format(new Date(data.TTL()*60*1000));
+            String nextCall = String.format("Next call in %s hours/minutes.",nextCallTime);
             System.out.println(nextCall);
             Logger.log(nextCall);
             try {Thread.sleep(data.TTL()*60*1000); } catch (InterruptedException ex) {}
@@ -50,7 +50,7 @@ public class UpdateThread extends Thread {
     }
     
     public void Stop(){ 
-        this.running=false; instance=null; 
+        this.running=false; instance=null;
         System.out.println("PROCESS STOPPED.");
         Logger.log("PROCESS STOPPED.");
     }

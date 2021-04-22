@@ -1,7 +1,6 @@
 
-package dynuclient.view.util;
+package dynuclient.resources;
 
-import dynuclient.view.main.DynuClient;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -10,7 +9,7 @@ import javax.swing.ImageIcon;
  *
  * @author sebad-git
  */
-public class LocalImages {
+public class Resources {
     
     public static final String DYN_ICON = "logodynu.png";
     public static final String DYN_LOGO = "logo.png";
@@ -18,7 +17,7 @@ public class LocalImages {
     
     public static BufferedImage loadImage(String fileName){
     try {
-        BufferedImage buff = ImageIO.read(LocalImages.class.getResourceAsStream(fileName));
+        BufferedImage buff = ImageIO.read(Resources.class.getResourceAsStream(fileName));
        return buff;
     } catch (Exception e) { e.printStackTrace(); return null; }
   }

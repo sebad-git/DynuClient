@@ -1,7 +1,7 @@
 
 package dynuclient.view.windows;
 
-import dynuclient.view.util.LocalImages;
+import dynuclient.resources.Resources;
 import dynuclient.model.Data;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -24,12 +24,17 @@ public class SettingsWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setResizable(false);
         initComponents();
-         setTitle("Dynu Settings");
+        setTitle("Dynu Settings");
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
         setLocation(x, y);
-        setIconImage(LocalImages.loadImage(LocalImages.DYN_ICON));
+        setIconImage(Resources.loadImage(Resources.DYN_ICON));
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        this.cb_ShowPWD.setSelected(false);
         this.data=Data.Load();
         this.txtUser.setText(this.data.User());
         this.txtPassword.setText(this.data.Password());
@@ -47,8 +52,9 @@ public class SettingsWindow extends javax.swing.JFrame {
             case 1440: this.cboTTL.setSelectedIndex(10); break;
         }
        this.txtPassword.setEchoChar('*');
+       super.setVisible(b);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,7 +77,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(222, 224, 228));
 
         lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUserIcon.setIcon(LocalImages.loadIcon(LocalImages.DYN_ICON));
+        lblUserIcon.setIcon(Resources.loadIcon(Resources.DYN_ICON));
 
         lblUser.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(64, 64, 64));

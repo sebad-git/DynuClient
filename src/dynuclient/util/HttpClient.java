@@ -16,7 +16,6 @@ public class HttpClient {
         try{
             String apiUrl =String.format(API_URL_FORMAT,user,password);
             URL url = new URL(apiUrl);
-            System.out.println("Connecting to:"+ apiUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Content-Type", "text/html; charset=utf-8");

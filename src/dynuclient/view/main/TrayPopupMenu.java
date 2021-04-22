@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dynuclient.view.main;
 
-import dynuclient.view.windows.SettingsWindow;
-import dynuclient.util.UpdateThread;
 import dynuclient.view.windows.SettingsWindow;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -22,20 +16,20 @@ public class TrayPopupMenu extends PopupMenu implements ActionListener{
     private final MenuItem settings = new MenuItem("Settings");
     private final MenuItem exit = new MenuItem("Exit");
     
-    public TrayPopupMenu(){
+    public TrayPopupMenu(){ init(); }
+    
+    private void init(){
        settings.addActionListener(this);
        exit.addActionListener(this);
        add(settings); add(exit);
     }
     
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==settings) {
            SettingsWindow.getInstance().setVisible(true);
            return;
         }
-        if (e.getSource()==exit) { 
-            UpdateThread.getInstance().Stop();
-            System.exit(0);
-        }
+        if (e.getSource()==exit) { App.exit(); }
     }
 }
