@@ -23,7 +23,7 @@ public class App {
     private static MonitorWindow monitor;
     
     public static void setTheme(){
-      try { UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName()); }
+      try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
       catch (Exception ex) { AppLogger.log(ex); ex.printStackTrace(); }
     }
      
