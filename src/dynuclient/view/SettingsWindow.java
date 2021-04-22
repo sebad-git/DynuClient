@@ -3,10 +3,7 @@ package dynuclient.view;
 
 import dynuclient.resources.Resources;
 import dynuclient.model.Data;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.IOException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,44 +12,41 @@ import javax.swing.JOptionPane;
 public class SettingsWindow extends javax.swing.JFrame {
 
     private Data data=null;
-    private static SettingsWindow instance;
-    public static SettingsWindow getInstance(){
-        if(instance==null){ instance = new SettingsWindow(); } return instance;
-    }
     
     public SettingsWindow() {
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setResizable(false);
         initComponents();
-        setTitle("Dynu Settings");
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-        setLocation(x, y);
-        setIconImage(Resources.loadImage(Resources.DYN_ICON));
+        App.init(this, "Dynu Settings",Resources.loadImage(Resources.DYN_ICON));
     }
 
     @Override
-    public void setVisible(boolean b) {
-        this.cb_ShowPWD.setSelected(false);
-        this.data=Data.Load();
-        this.txtUser.setText(this.data.User());
-        this.txtPassword.setText(this.data.Password());
-        switch(this.data.TTL()){
-            case 5: this.cboTTL.setSelectedIndex(0); break;
-            case 10: this.cboTTL.setSelectedIndex(1); break;
-            case 15: this.cboTTL.setSelectedIndex(2); break;
-            case 30: this.cboTTL.setSelectedIndex(3); break;
-            case 60: this.cboTTL.setSelectedIndex(4); break;
-            case 120: this.cboTTL.setSelectedIndex(5); break;
-            case 180: this.cboTTL.setSelectedIndex(6); break;
-            case 300: this.cboTTL.setSelectedIndex(7); break;
-            case 600: this.cboTTL.setSelectedIndex(8); break;
-            case 900: this.cboTTL.setSelectedIndex(9); break;
-            case 1440: this.cboTTL.setSelectedIndex(10); break;
+    public void setVisible(boolean visible) {
+        if(visible){
+            this.cb_ShowPWD.setSelected(false);
+            this.data=Data.Load();
+            this.txtUser.setText(this.data.User());
+            this.txtPassword.setText(this.data.Password());
+            switch(this.data.TTL()){
+                case 5: this.cboTTL.setSelectedIndex(0); break;
+                case 10: this.cboTTL.setSelectedIndex(1); break;
+                case 15: this.cboTTL.setSelectedIndex(2); break;
+                case 30: this.cboTTL.setSelectedIndex(3); break;
+                case 60: this.cboTTL.setSelectedIndex(4); break;
+                case 120: this.cboTTL.setSelectedIndex(5); break;
+                case 180: this.cboTTL.setSelectedIndex(6); break;
+                case 300: this.cboTTL.setSelectedIndex(7); break;
+                case 600: this.cboTTL.setSelectedIndex(8); break;
+                case 900: this.cboTTL.setSelectedIndex(9); break;
+                case 1440: this.cboTTL.setSelectedIndex(10); break;
+                case 4320: this.cboTTL.setSelectedIndex(11); break;
+                case 7200: this.cboTTL.setSelectedIndex(12); break;
+                case 10080: this.cboTTL.setSelectedIndex(13); break;
+                case 20160: this.cboTTL.setSelectedIndex(14); break;
+                case 30240: this.cboTTL.setSelectedIndex(15); break;
+                case 40320: this.cboTTL.setSelectedIndex(16); break;
+            }
+            this.txtPassword.setEchoChar('*');
         }
-       this.txtPassword.setEchoChar('*');
-       super.setVisible(b);
+       super.setVisible(visible);
     }
     
     @SuppressWarnings("unchecked")
@@ -154,7 +148,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         });
 
         cboTTL.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        cboTTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "3 hours", "5 hours", "10  hours", "15  hours", "24 hours" }));
+        cboTTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "3 hours", "5 hours", "10  hours", "15  hours", "24 hours", "3 days", "5 days", "1 week", "2 Weeks", "3 Weeks", "4 Weeks" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -241,6 +235,12 @@ public class SettingsWindow extends javax.swing.JFrame {
             case 8: ttl = 600; break;
             case 9: ttl = 900; break;
             case 10: ttl = 1440; break;
+            case 11: ttl = 4320; break;
+            case 12: ttl = 7200; break;
+            case 13: ttl = 10080; break;
+            case 14: ttl = 20160; break;
+            case 15: ttl = 30240; break;
+            case 16: ttl = 40320; break;
         }
         this.data = new Data(txtUser.getText(), new String(txtPassword.getPassword()),ttl);
         try { Data.save(this.data); }
@@ -249,7 +249,7 @@ public class SettingsWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnStopActionPerformed
 
     private void cb_ShowPWDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ShowPWDActionPerformed
@@ -263,11 +263,11 @@ public class SettingsWindow extends javax.swing.JFrame {
     
     private boolean validateData(){
        if(this.txtUser.getText()== null || this.txtUser.getText().length()<1){
-            JOptionPane.showMessageDialog(this, "User is empty.","Error", JOptionPane.ERROR_MESSAGE);
+            App.ShowErrorMessage(this, "User is empty.");
             return false;
         }
         if(this.txtPassword.getPassword()== null || this.txtPassword.getPassword().length<1){
-            JOptionPane.showMessageDialog(this, "Password is empty.","Error", JOptionPane.ERROR_MESSAGE);
+            App.ShowErrorMessage(this, "Password is empty.");
             return false;
         }
         return true;

@@ -13,9 +13,9 @@ import java.util.Date;
  *
  * @author sebad-git
  */
-public class Logger {
+public class AppLogger {
     
-    private static File getLogFile() throws IOException{
+    public static File getLogFile() throws IOException{
         String fileName = String.format( "logs/%s.log",new SimpleDateFormat("dd-MM-yyyy").format(new Date()) );
         File logFile = new File(fileName);
         if(!logFile.getParentFile().exists()){ logFile.getParentFile().mkdirs(); }

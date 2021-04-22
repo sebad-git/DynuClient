@@ -3,14 +3,12 @@ package dynuclient.view;
 
 import dynuclient.model.Data;
 import dynuclient.resources.Resources;
-import dynuclient.util.Logger;
-import dynuclient.util.UpdateThread;
+import dynuclient.util.AppLogger;
+import dynuclient.util.UpdateService;
 import dynuclient.view.App;
 import dynuclient.view.TrayPopupMenu;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.SystemTray;
-import java.awt.Toolkit;
 import java.awt.TrayIcon;
 
 /**
@@ -20,14 +18,9 @@ import java.awt.TrayIcon;
 public class DynuClient extends javax.swing.JFrame {
 
     public DynuClient() {
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated (true);
-        setResizable(false);
         initComponents();
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-        setLocation(x, y);
+        App.init(this, "",null);
     }
 
     @Override
@@ -57,10 +50,10 @@ public class DynuClient extends javax.swing.JFrame {
                 tray.add(trayIcon);
                 trayIcon.displayMessage(App.NAME, "App Started.", TrayIcon.MessageType.INFO);
             }
-            catch (Exception e) {Logger.log(e); App.exit("Tray icon not Supported."); }
-         if(Data.isEmpty()){ SettingsWindow.getInstance().setVisible(true); }
+            catch (Exception e) {AppLogger.log(e); App.exit("Tray icon not Supported."); }
+         if(Data.isEmpty()){ App.ShowSettings(); }
          else{
-             UpdateThread.getInstance().Start();
+             //UpdateService.getInstance().Start();
              trayIcon.displayMessage(App.NAME, "Update Service Started..", TrayIcon.MessageType.INFO);
          }
        }else{ App.exit("Tray icon not Supported."); }

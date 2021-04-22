@@ -1,7 +1,7 @@
 
 package dynuclient.model;
 
-import dynuclient.util.UpdateThread;
+import dynuclient.util.UpdateService;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,7 +37,7 @@ public class Data {
         writer.write(sData.toString());
         writer.flush();
         writer.close();
-        if(!Data.isEmpty()){ UpdateThread.getInstance().Start(); }
+        if(!Data.isEmpty()){ UpdateService.getInstance().Start(); }
     }
     
      public static final boolean isEmpty(){ 

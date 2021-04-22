@@ -277,7 +277,7 @@
               <Font name="Calibri" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="11">
+              <StringArray count="17">
                 <StringItem index="0" value="5 minutes"/>
                 <StringItem index="1" value="10 minutes"/>
                 <StringItem index="2" value="15 minutes"/>
@@ -289,6 +289,12 @@
                 <StringItem index="8" value="10  hours"/>
                 <StringItem index="9" value="15  hours"/>
                 <StringItem index="10" value="24 hours"/>
+                <StringItem index="11" value="3 days"/>
+                <StringItem index="12" value="5 days"/>
+                <StringItem index="13" value="1 week"/>
+                <StringItem index="14" value="2 Weeks"/>
+                <StringItem index="15" value="3 Weeks"/>
+                <StringItem index="16" value="4 Weeks"/>
               </StringArray>
             </Property>
           </Properties>
