@@ -127,7 +127,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         btnStart.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         btnStart.setForeground(new java.awt.Color(64, 64, 64));
         btnStart.setText("Save");
-        btnStart.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnStart.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnStart.setBorderPainted(false);
         btnStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStart.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +140,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         btnStop.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         btnStop.setForeground(new java.awt.Color(64, 64, 64));
         btnStop.setText("Close");
-        btnStop.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStopActionPerformed(evt);
