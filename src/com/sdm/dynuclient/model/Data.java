@@ -26,6 +26,8 @@ public class Data {
     public final String Password(){ return password; }
     public final int TTL(){ try{ return Integer.parseInt(ttl);}catch(NumberFormatException e){return 120;} }
     
+    private static final String ENC_PASS = String.format("%s.@Sdm#App$$", App.NAME);
+    
     public Data(final String user, final String password, final int ttl){
         this.user=user; this.password=password; this.ttl = String.valueOf(ttl);
     }
@@ -34,10 +36,10 @@ public class Data {
         if(!DATA_FILE.exists()){DATA_FILE.createNewFile();}
         final BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE));
         final StringBuilder sData = new StringBuilder();
-        sData.append(data.User()); sData.append(";");
-        sData.append(data.Password()); sData.append(";");
+        sData.append(Security.encriptAES(ENC_PASS,data.User())); sData.append(";");
+        sData.append(Security.encriptAES(ENC_PASS,data.Password())); sData.append(";");
         sData.append(data.TTL());
-        writer.write(Security.encriptAES(String.format("%s.@Sdm#App$$", App.NAME),sData.toString()));
+        writer.write(sData.toString());
         writer.flush();
         writer.close();
         if(!Data.isEmpty()){ UpdateService.getInstance().Start(); }
@@ -58,11 +60,13 @@ public class Data {
         final String[] sData;
         try (
             final BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE))) {
-            final String fileData = Security.deciptAES(String.format("%s.@Sdm#App$$", App.NAME),reader.readLine());
+            final String fileData = reader.readLine();
             reader.close();
             if(fileData==null || fileData.length()<1){return empty; }
             sData = fileData.split(";");
-            user = sData[0]; password = sData[1]; ttl = sData[2];
+            user = Security.deciptAES(ENC_PASS,sData[0]);
+            password = Security.deciptAES(ENC_PASS,sData[1]);
+            ttl = sData[2];
             return new Data(user, password, Integer.parseInt(ttl));
         } catch (Exception ex) { AppLogger.log(ex); System.out.println(ex.getMessage()); }
         return empty;
