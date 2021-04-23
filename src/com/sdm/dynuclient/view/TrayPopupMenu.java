@@ -1,5 +1,5 @@
 
-package dynuclient.view;
+package com.sdm.dynuclient.view;
 
 import java.awt.MenuItem;
 import java.awt.PopupMenu;

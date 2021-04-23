@@ -1,10 +1,10 @@
 
-package dynuclient.view;
+package com.sdm.dynuclient.view;
 
-import dynuclient.model.Data;
-import dynuclient.resources.Resources;
-import dynuclient.util.AppLogger;
-import dynuclient.service.UpdateService;
+import com.sdm.dynuclient.model.Data;
+import com.sdm.dynuclient.resources.Resources;
+import com.sdm.dynuclient.util.AppLogger;
+import com.sdm.dynuclient.service.UpdateService;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
@@ -81,7 +81,7 @@ public class DynuClient extends javax.swing.JFrame {
         jLabel1.setText("Dynu Client");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(dynuclient.resources.Resources.loadIcon(dynuclient.resources.Resources.DYN_LOGO));
+        jLabel2.setIcon(com.sdm.dynuclient.resources.Resources.loadIcon(com.sdm.dynuclient.resources.Resources.DYN_LOGO));
         jLabel2.setIconTextGap(0);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

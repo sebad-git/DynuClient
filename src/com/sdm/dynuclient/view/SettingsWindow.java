@@ -1,8 +1,8 @@
 
-package dynuclient.view;
+package com.sdm.dynuclient.view;
 
-import dynuclient.resources.Resources;
-import dynuclient.model.Data;
+import com.sdm.dynuclient.resources.Resources;
+import com.sdm.dynuclient.model.Data;
 import java.io.IOException;
 
 /**
@@ -53,7 +53,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(222, 224, 228));
 
         lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUserIcon.setIcon(dynuclient.resources.Resources.loadIcon(dynuclient.resources.Resources.DYN_ICON));
+        lblUserIcon.setIcon(com.sdm.dynuclient.resources.Resources.loadIcon(com.sdm.dynuclient.resources.Resources.DYN_ICON));
 
         lblUser.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(64, 64, 64));

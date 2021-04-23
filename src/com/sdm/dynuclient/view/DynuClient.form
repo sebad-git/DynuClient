@@ -55,7 +55,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="0" postCode="jLabel2.setIcon(dynuclient.resources.Resources.loadIcon(dynuclient.resources.Resources.DYN_LOGO));"/>
+        <Property name="horizontalAlignment" type="int" value="0" postCode="jLabel2.setIcon(com.sdm.dynuclient.resources.Resources.loadIcon(com.sdm.dynuclient.resources.Resources.DYN_LOGO));"/>
         <Property name="iconTextGap" type="int" value="0"/>
       </Properties>
     </Component>

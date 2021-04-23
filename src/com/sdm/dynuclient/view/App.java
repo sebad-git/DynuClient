@@ -1,8 +1,8 @@
 
-package dynuclient.view;
+package com.sdm.dynuclient.view;
 
-import dynuclient.util.AppLogger;
-import dynuclient.service.UpdateService;
+import com.sdm.dynuclient.util.AppLogger;
+import com.sdm.dynuclient.service.UpdateService;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;

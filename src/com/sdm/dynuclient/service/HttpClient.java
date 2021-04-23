@@ -1,5 +1,6 @@
 
-package dynuclient.util;
+package com.sdm.dynuclient.service;
+import com.sdm.dynuclient.util.AppLogger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -22,20 +23,20 @@ public class HttpClient {
     private static final int DYNU_TIMEOUT = 15 *1000;
     private static final String DYNU_API = "http://api.dynu.com/nic/update?username=%s&password=%s";
     
-    public String updateIP(final String user, final String password){
+    public final String updateIP(final String user, final String password){
         try{
             String password256 = Encript(password);
             password256 = password256!=null? password256 : password;
-            String apiUrl =String.format(DYNU_API,user,password256);
-            URL url = new URL(apiUrl);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            final String apiUrl =String.format(DYNU_API,user,password256);
+            final URL url = new URL(apiUrl);
+            final HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", USER_AGENT);
             con.setConnectTimeout(DYNU_TIMEOUT); con.setReadTimeout(DYNU_TIMEOUT);
-            int responseCode = con.getResponseCode();
+            final int responseCode = con.getResponseCode();
              if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String response = in.readLine(); in.close();
+                final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                final String response = in.readLine(); in.close();
                 if(response.equals("nochg")){return "IP did not change."; }
                 return response;
             }
@@ -43,39 +44,33 @@ public class HttpClient {
         }catch(Exception e){ return String.format("Connection Failed (%s).", e.getMessage()); }
     }
     
-    public String getIPV4(){
+    public final String getIPV4(){
          try{
-            URL url = new URL(IPV_4_API);
+            final URL url = new URL(IPV_4_API);
             System.out.println(String.format("Connecting to: %s", IPV_4_API));
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            final HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", USER_AGENT);
             con.setConnectTimeout(TIMEOUT); con.setReadTimeout(TIMEOUT);
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String ipv4 = in.readLine(); in.close(); return ipv4;
+                final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                final String ipv4 = in.readLine(); in.close(); return ipv4;
             }
             return null;
         }catch(Exception e){ return null; }
     }
     
-    private String getIPV6(String ipv4){
-         try{ return String.format("::%s", ipv4);
-        }catch(Exception e){ return null; }
-    }
-    
-     private String Encript(String text){
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(
-                text.getBytes(StandardCharsets.UTF_8));
-                StringBuilder hexString = new StringBuilder(2 * hash.length);
-            for (int i = 0; i < hash.length; i++) {
-                String hex = Integer.toHexString(0xff & hash[i]);
-                if(hex.length() == 1) { hexString.append('0'); }
-                hexString.append(hex);
-            }
-            return hexString.toString();
+     private final String Encript(final String text){
+         try {
+             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+             final byte[] hash = digest.digest( text.getBytes(StandardCharsets.UTF_8));
+             final StringBuilder hexString = new StringBuilder(2 * hash.length);
+             for (int i = 0; i < hash.length; i++) {
+                 String hex = Integer.toHexString(0xff & hash[i]);
+                 if(hex.length() == 1) { hexString.append('0'); }
+                 hexString.append(hex);
+             }
+             return hexString.toString();
         }
         catch (Exception e) { AppLogger.log(e); e.getMessage(); return null; }
     }

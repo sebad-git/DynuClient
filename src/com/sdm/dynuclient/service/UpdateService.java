@@ -1,9 +1,8 @@
 
-package dynuclient.service;
+package com.sdm.dynuclient.service;
 
-import dynuclient.model.Data;
-import dynuclient.util.AppLogger;
-import dynuclient.util.HttpClient;
+import com.sdm.dynuclient.model.Data;
+import com.sdm.dynuclient.util.AppLogger;
 /**
  *
  * @author sebad-git
@@ -19,25 +18,25 @@ public class UpdateService extends Thread {
         if(instance==null){instance=new UpdateService(); } return instance;
     }
     
-    public void Start(){
+    public final void Start(){
         if(Data.isEmpty()){ this.running=false; return; }
         if(this.running){ return; }
         this.running=true;
-         this.client = new HttpClient();
-        this.start();
+        this.client = new HttpClient();
         AppLogger.log("PROCESS STARTED.");
         System.out.println("PROCESS STARTED.");
+        this.start();
     }
     
-    public boolean isRunning(){return this.running; }
+    public final boolean isRunning(){return this.running; }
     
     public void run(){
         while(this.running){
-            if(Data.isEmpty()){ return; }
+            if(Data.isEmpty()){ AppLogger.log("User data not Found"); return; }
             System.out.println("Calling api.");
             AppLogger.log("Calling api.");
-            Data data = Data.Load();
-            String response=this.client.updateIP(data.User(),data.Password());
+            final Data data = Data.Load();
+            final String response=this.client.updateIP(data.User(),data.Password());
             System.out.println(response);
             AppLogger.log(response);
             String nextCallTime = String.format("%s seconds",data.TTL());
@@ -46,10 +45,11 @@ public class UpdateService extends Thread {
             System.out.println(nextCall);
             AppLogger.log(nextCall);
             try {Thread.sleep(data.TTL()*1000); } catch (InterruptedException ex) {}
+            AppLogger.clearLogs();
         }
     }
     
-    public void Stop(){ 
+    public final void Stop(){ 
         this.running=false; instance=null;
         System.out.println("PROCESS STOPPED.");
         AppLogger.log("PROCESS STOPPED.");

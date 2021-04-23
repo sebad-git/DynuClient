@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dynuclient.view;
+package com.sdm.dynuclient.view;
 
-import dynuclient.resources.Resources;
-import dynuclient.util.AppLogger;
+import com.sdm.dynuclient.resources.Resources;
+import com.sdm.dynuclient.util.AppLogger;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -57,7 +57,7 @@ public class MonitorWindow extends javax.swing.JFrame {
                     reader.close();
                     txtLog.setText(logMonitor.toString());
                 } catch (Exception ex) { System.out.println(ex.getMessage()); }
-                try { Thread.sleep(15 * 1000); } catch (InterruptedException ex) {ex.printStackTrace(); }
+                try { Thread.sleep(30 * 1000); } catch (InterruptedException ex) {ex.printStackTrace(); }
             }
         }
         public void Stop(){ if(!running){ return; } running=false; monitorThread=null; }
@@ -90,9 +90,7 @@ public class MonitorWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
         );
 
         pack();
