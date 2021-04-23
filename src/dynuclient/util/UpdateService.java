@@ -2,9 +2,6 @@
 package dynuclient.util;
 
 import dynuclient.model.Data;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *
  * @author sebad-git
@@ -13,6 +10,7 @@ public class UpdateService extends Thread {
     
     private HttpClient client;
     private boolean running;
+    private String currentIP=null;
     
     private static UpdateService instance;
     
@@ -35,20 +33,26 @@ public class UpdateService extends Thread {
     public void run(){
         while(this.running){
             if(Data.isEmpty()){ return; }
+            System.out.println("Getting public IP.");
+            String ipv4 = this.client.getIPV4();
+            /*
+            if(currentIP!=null && ipv4.equals(currentIP)){
+                System.out.println("Ip didnt change.");
+                AppLogger.log("Ip didnt change.");
+            }
+            */
             System.out.println("Calling api.");
             AppLogger.log("Calling api.");
             Data data = Data.Load();
             String response=this.client.CallApi(data.User(),data.Password());
             System.out.println(response);
             AppLogger.log(response);
-            String nextCallTime = String.format("%s minutes",data.TTL());
-            if(data.TTL()>=60){ nextCallTime = String.format("%s hour(s)",data.TTL()/60); }
-            if(data.TTL()>=1440){ nextCallTime = String.format("%s day(s)",data.TTL()/60/24); }
-            if(data.TTL()>=10080){ nextCallTime = String.format("%s week(s)",data.TTL()/60/24/7); }
+            String nextCallTime = String.format("%s seconds",data.TTL());
+            if(data.TTL()>=60){ nextCallTime = String.format("%s minutes(s)",data.TTL()/60f); }
             String nextCall = String.format("Next call in %s.",nextCallTime);
             System.out.println(nextCall);
             AppLogger.log(nextCall);
-            try {Thread.sleep(data.TTL()*60*1000); } catch (InterruptedException ex) {}
+            try {Thread.sleep(data.TTL()*1000); } catch (InterruptedException ex) {}
         }
     }
     

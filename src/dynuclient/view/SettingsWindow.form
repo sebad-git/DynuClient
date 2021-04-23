@@ -47,34 +47,42 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="lblUserIcon" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnStart" min="-2" pref="156" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnStop" min="-2" pref="163" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblPassword" pref="130" max="32767" attributes="0"/>
-                              <Component id="lblUser" max="32767" attributes="0"/>
+                              <Component id="lblUser" pref="105" max="32767" attributes="0"/>
+                              <Component id="lblPassword" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtUser" pref="297" max="32767" attributes="0"/>
                               <Component id="txtPassword" max="32767" attributes="0"/>
-                              <Component id="txtUser" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblTTL1" min="-2" pref="132" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cboTTL" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnStart" min="-2" pref="156" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="lblTTL1" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtTTL" min="-2" pref="89" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cb_ShowPWD" min="-2" pref="134" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
+                                  <Component id="btnStop" min="-2" pref="163" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="cb_ShowPWD" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,27 +91,27 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="lblUserIcon" min="-2" pref="177" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblUser" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txtUser" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtUser" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="lblUser" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtPassword" max="32767" attributes="0"/>
-                      <Component id="lblPassword" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="lblPassword" max="32767" attributes="0"/>
+                      <Component id="txtPassword" pref="33" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="cb_ShowPWD" alignment="0" max="32767" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="lblTTL1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="cboTTL" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="lblTTL1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="txtTTL" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnStart" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="btnStop" min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnStart" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnStop" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -270,36 +278,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cboTTL">
+        <Component class="javax.swing.JTextField" name="txtTTL">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f6" green="f6" red="f6" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="14" style="0"/>
             </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="17">
-                <StringItem index="0" value="5 minutes"/>
-                <StringItem index="1" value="10 minutes"/>
-                <StringItem index="2" value="15 minutes"/>
-                <StringItem index="3" value="30 minutes"/>
-                <StringItem index="4" value="1 hour"/>
-                <StringItem index="5" value="2 hours"/>
-                <StringItem index="6" value="3 hours"/>
-                <StringItem index="7" value="5 hours"/>
-                <StringItem index="8" value="10  hours"/>
-                <StringItem index="9" value="15  hours"/>
-                <StringItem index="10" value="24 hours"/>
-                <StringItem index="11" value="3 days"/>
-                <StringItem index="12" value="5 days"/>
-                <StringItem index="13" value="1 week"/>
-                <StringItem index="14" value="2 Weeks"/>
-                <StringItem index="15" value="3 Weeks"/>
-                <StringItem index="16" value="4 Weeks"/>
-              </StringArray>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="30"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

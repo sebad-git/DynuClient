@@ -70,9 +70,9 @@ public class MonitorWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextArea();
 
-        txtLog.setBackground(new java.awt.Color(51, 50, 50));
+        txtLog.setBackground(new java.awt.Color(0, 0, 0));
         txtLog.setColumns(20);
-        txtLog.setFont(new java.awt.Font("Cambria Math", 0, 13)); // NOI18N
+        txtLog.setFont(new java.awt.Font("Lucida Console", 0, 13)); // NOI18N
         txtLog.setForeground(new java.awt.Color(255, 255, 255));
         txtLog.setRows(5);
         txtLog.setBorder(null);
