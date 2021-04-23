@@ -38,6 +38,7 @@ public class HttpClient {
                 final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 final String response = in.readLine(); in.close();
                 if(response.equals("nochg")){return "IP did not change."; }
+                if(response.equals("badauth")){return "User or password incorrect."; }
                 return response;
             }
             return String.format("Api error: Response code:%s", responseCode);
