@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-
+import com.sdm.dynuclient.util.Security;
 /**
  *
  * @author sebad-git
@@ -25,8 +25,7 @@ public class HttpClient {
     
     public final String updateIP(final String user, final String password){
         try{
-            String password256 = Encript(password);
-            password256 = password256!=null? password256 : password;
+            final String password256 = Security.encriptSHA256(password);
             final String apiUrl =String.format(DYNU_API,user,password256);
             final URL url = new URL(apiUrl);
             final HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -59,20 +58,5 @@ public class HttpClient {
             }
             return null;
         }catch(Exception e){ return null; }
-    }
-    
-     private final String Encript(final String text){
-         try {
-             final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-             final byte[] hash = digest.digest( text.getBytes(StandardCharsets.UTF_8));
-             final StringBuilder hexString = new StringBuilder(2 * hash.length);
-             for (int i = 0; i < hash.length; i++) {
-                 String hex = Integer.toHexString(0xff & hash[i]);
-                 if(hex.length() == 1) { hexString.append('0'); }
-                 hexString.append(hex);
-             }
-             return hexString.toString();
-        }
-        catch (Exception e) { AppLogger.log(e); e.getMessage(); return null; }
     }
 }
