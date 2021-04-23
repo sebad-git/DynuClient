@@ -1,7 +1,7 @@
 
 package dynuclient.model;
 
-import dynuclient.util.UpdateService;
+import dynuclient.service.UpdateService;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

@@ -57,7 +57,7 @@ public class MonitorWindow extends javax.swing.JFrame {
                     reader.close();
                     txtLog.setText(logMonitor.toString());
                 } catch (Exception ex) { System.out.println(ex.getMessage()); }
-                try { Thread.sleep(5 * 1000); } catch (InterruptedException ex) {ex.printStackTrace(); }
+                try { Thread.sleep(15 * 1000); } catch (InterruptedException ex) {ex.printStackTrace(); }
             }
         }
         public void Stop(){ if(!running){ return; } running=false; monitorThread=null; }

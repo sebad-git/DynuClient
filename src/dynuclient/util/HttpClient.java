@@ -1,14 +1,11 @@
 
 package dynuclient.util;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.Base64;
 
 /**
  *
@@ -20,30 +17,29 @@ public class HttpClient {
     private static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41";
     
     private static final String IPV_4_API = "http://checkip.amazonaws.com";
-    //private static final String IPV_6_API = "http://www.trackip.net/ip";
     private static final String IPV_6_API = "http://bot.whatismyipaddress.com";
     
-    private static final int DYNU_TIMEOUT = 10 *1000;
-    //private static final String DYNU_API = "http://api.dynu.com/nic/update?username=%s&password=%s&myip=%s";
+    private static final int DYNU_TIMEOUT = 15 *1000;
     private static final String DYNU_API = "http://api.dynu.com/nic/update?username=%s&password=%s";
     
-    public String CallApi(String user, String password){
+    public String updateIP(final String user, final String password){
         try{
-            String ipv4=getIPV4(); String ipv6=getIPV6(ipv4);
-            //String apiUrl =String.format(DYNU_API,user,ipv4,ipv6,password);
-            String apiUrl =String.format(DYNU_API,user,password);
+            String password256 = Encript(password);
+            password256 = password256!=null? password256 : password;
+            String apiUrl =String.format(DYNU_API,user,password256);
             URL url = new URL(apiUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", USER_AGENT);
             con.setConnectTimeout(DYNU_TIMEOUT); con.setReadTimeout(DYNU_TIMEOUT);
+            int responseCode = con.getResponseCode();
              if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String response = in.readLine(); in.close();
-                con.disconnect();
+                if(response.equals("nochg")){return "IP did not change."; }
                 return response;
             }
-            return "IP NOT Updated";
+            return String.format("Api error: Response code:%s", responseCode);
         }catch(Exception e){ return String.format("Connection Failed (%s).", e.getMessage()); }
     }
     
@@ -66,5 +62,21 @@ public class HttpClient {
     private String getIPV6(String ipv4){
          try{ return String.format("::%s", ipv4);
         }catch(Exception e){ return null; }
+    }
+    
+     private String Encript(String text){
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(
+                text.getBytes(StandardCharsets.UTF_8));
+                StringBuilder hexString = new StringBuilder(2 * hash.length);
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) { hexString.append('0'); }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        }
+        catch (Exception e) { AppLogger.log(e); e.getMessage(); return null; }
     }
 }

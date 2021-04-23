@@ -2,7 +2,7 @@
 package dynuclient.view;
 
 import dynuclient.util.AppLogger;
-import dynuclient.util.UpdateService;
+import dynuclient.service.UpdateService;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;

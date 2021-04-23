@@ -1,7 +1,9 @@
 
-package dynuclient.util;
+package dynuclient.service;
 
 import dynuclient.model.Data;
+import dynuclient.util.AppLogger;
+import dynuclient.util.HttpClient;
 /**
  *
  * @author sebad-git
@@ -10,7 +12,6 @@ public class UpdateService extends Thread {
     
     private HttpClient client;
     private boolean running;
-    private String currentIP=null;
     
     private static UpdateService instance;
     
@@ -33,18 +34,10 @@ public class UpdateService extends Thread {
     public void run(){
         while(this.running){
             if(Data.isEmpty()){ return; }
-            System.out.println("Getting public IP.");
-            String ipv4 = this.client.getIPV4();
-            /*
-            if(currentIP!=null && ipv4.equals(currentIP)){
-                System.out.println("Ip didnt change.");
-                AppLogger.log("Ip didnt change.");
-            }
-            */
             System.out.println("Calling api.");
             AppLogger.log("Calling api.");
             Data data = Data.Load();
-            String response=this.client.CallApi(data.User(),data.Password());
+            String response=this.client.updateIP(data.User(),data.Password());
             System.out.println(response);
             AppLogger.log(response);
             String nextCallTime = String.format("%s seconds",data.TTL());

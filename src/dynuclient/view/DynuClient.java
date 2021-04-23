@@ -4,7 +4,7 @@ package dynuclient.view;
 import dynuclient.model.Data;
 import dynuclient.resources.Resources;
 import dynuclient.util.AppLogger;
-import dynuclient.util.UpdateService;
+import dynuclient.service.UpdateService;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
