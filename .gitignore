@@ -2,15 +2,20 @@
 *.class
 /build/*
 
+# Data Files
+dynu.dat
+/dist/dynu.dat
+
+# Readme
+/dist/README.TXT
+
 # Log file
 *.log
-
-# Data
-*.dat
+/logs/*
+/dist/logs/*
 
 # BlueJ files
 *.ctxt
-
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
